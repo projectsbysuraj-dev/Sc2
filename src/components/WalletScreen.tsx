@@ -230,7 +230,7 @@ export const WalletScreen: React.FC<WalletScreenProps> = ({ user, settings, onNa
             <span className="w-5 h-4 rounded bg-gradient-to-r from-[#16a34a] to-[#22c55e] text-white font-['Outfit'] font-black text-[10px] flex items-center justify-center -rotate-12 shadow-xs">
               ₹
             </span>
-            <span>Go to Scratch</span>
+            <span>Go to Scratch (Win ₹50)</span>
           </button>
         </div>
       </div>

@@ -121,7 +121,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               🤝
             </span>
             <span className="font-['Outfit'] font-bold text-slate-800 text-[15px]">
-              Refer Friends (1 Refer = 1 Spin)
+              Refer Friends (Win Up To ₹50 per scratch)
             </span>
           </div>
           <ChevronRight className="w-5 h-5 text-slate-400 stroke-[2.2]" />

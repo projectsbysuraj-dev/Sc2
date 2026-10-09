@@ -46,7 +46,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   const scratchStrokeCountRef = useRef(0);
   const lastPointRef = useRef<{ x: number; y: number } | null>(null);
 
-  const winAmount = settings.spinWinAmount || 5;
+  const winAmount = 5; // ALWAYS exactly ₹5 reward as requested by user
 
   // -------------------------------------------------------------
   // Draw the exact Silver Scratch Foil Canvas (Matches Reference)
@@ -103,13 +103,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     ctx.lineWidth = 1;
     ctx.strokeRect(12, 12, width - 24, height - 24);
 
-    // 5. Center Embossed "SCRATCH CARD" (Clean, Large, Exactly as Requested)
+    // 5. Center Embossed "SCRATCH CARD" & "WIN UP TO ₹50"
     const centerX = width * 0.5;
     const centerY = height * 0.5;
 
     ctx.save();
     // 3D Shadow layer
-    ctx.font = '900 32px "Outfit", sans-serif';
+    ctx.font = '900 28px "Outfit", sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
@@ -117,10 +117,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     ctx.shadowOffsetX = 0;
     ctx.shadowOffsetY = 3;
     ctx.fillStyle = '#0f172a';
-    ctx.fillText('SCRATCH CARD', centerX, centerY + 2);
+    ctx.fillText('SCRATCH CARD', centerX, centerY - 11);
 
     // Front embossed metallic text
-    const textGrad = ctx.createLinearGradient(0, centerY - 20, 0, centerY + 20);
+    const textGrad = ctx.createLinearGradient(0, centerY - 30, 0, centerY + 10);
     textGrad.addColorStop(0, '#ffffff');
     textGrad.addColorStop(0.5, '#f8fafc');
     textGrad.addColorStop(1, '#cbd5e1');
@@ -128,7 +128,15 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
     ctx.shadowBlur = 4;
     ctx.shadowOffsetY = 1;
-    ctx.fillText('SCRATCH CARD', centerX, centerY);
+    ctx.fillText('SCRATCH CARD', centerX, centerY - 11);
+
+    // Subtitle: WIN UP TO ₹50
+    ctx.font = '900 15px "Outfit", sans-serif';
+    ctx.fillStyle = '#fef08a';
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.85)';
+    ctx.shadowBlur = 4;
+    ctx.shadowOffsetY = 1;
+    ctx.fillText('★ WIN UP TO ₹50 ★', centerX, centerY + 23);
     ctx.restore();
 
     // Reset drawing tracking state
@@ -420,10 +428,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             </defs>
           </svg>
 
-          {/* Top-Right Speech Bubble Badge: "Always ₹5" */}
+          {/* Top-Right Speech Bubble Badge: "Win Upto ₹50" */}
           <div className="absolute top-3 right-3 sm:top-3.5 sm:right-4 z-20">
             <div className="relative bg-[#16a34a] text-white font-['Outfit'] font-black text-[10px] sm:text-[11px] px-2.5 sm:px-3.5 py-0.5 sm:py-1 rounded-full shadow-md shadow-emerald-700/30 tracking-tight flex items-center gap-1 border border-emerald-400/40">
-              <span>Always ₹5</span>
+              <span>Win Upto ₹50</span>
               {/* Speech bubble pointer tail */}
               <div className="absolute -bottom-1 left-3 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#16a34a] rotate-45" />
             </div>
@@ -437,15 +445,15 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 Scratch &amp; Win
               </h2>
 
-              {/* Title Line 2: Instant ₹5 Cash */}
+              {/* Title Line 2: Win Upto ₹50 Cash */}
               <div className="flex items-center gap-1.5 font-['Outfit'] font-black text-[21px] sm:text-[25px] tracking-tight leading-tight mb-1 sm:mb-2">
-                <span className="text-[#16a34a]">Instant</span>
-                <span className="text-[#ea580c]">₹5 Cash</span>
+                <span className="text-[#16a34a]">Win Upto</span>
+                <span className="text-[#ea580c]">₹50 Cash</span>
               </div>
 
               {/* Description */}
               <p className="text-slate-600 text-[11px] sm:text-xs font-semibold leading-snug sm:leading-relaxed mb-3 max-w-[200px]">
-                Scratch card &amp; win real cash directly in your wallet!
+                Scratch card &amp; win up to ₹50 real cash directly in your wallet!
               </p>
 
               {/* Action Button: JOIN CHANNEL (Telegram Join Button) */}
@@ -489,10 +497,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             </div>
             <div className="text-left">
               <div className="text-[10px] sm:text-[11px] font-black tracking-tight text-slate-900 leading-tight whitespace-nowrap">
-                1 SIGN UP
+                1 SIGN UP = 1 SCRATCH
               </div>
               <div className="text-[10px] sm:text-[11px] font-black text-[#ff5e00] leading-tight whitespace-nowrap">
-                = 1 SCRATCH
+                WIN UP TO ₹50
               </div>
             </div>
           </div>
@@ -514,10 +522,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             </div>
             <div>
               <div className="text-[10px] sm:text-[11px] font-black tracking-tight text-slate-900 leading-tight whitespace-nowrap">
-                1 REFER
+                1 REFER = 1 SCRATCH
               </div>
               <div className="text-[10px] sm:text-[11px] font-black text-[#ff5e00] leading-tight whitespace-nowrap">
-                = 1 SCRATCH
+                WIN UP TO ₹50
               </div>
             </div>
           </button>
@@ -528,13 +536,18 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       {/* 2. SECTION HEADER: Flame Badge + "Scratch & Win" + Dark Mode Toggle */}
       {/* ------------------------------------------------------------- */}
       <div className="w-full flex items-center justify-between px-1 mt-1 gap-2">
-        <div className="bg-white rounded-2xl px-4 py-2 shadow-sm border border-slate-100 flex items-center gap-2.5">
+        <div className="bg-white rounded-2xl px-3.5 py-2 shadow-sm border border-slate-100 flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-orange-600 via-orange-500 to-amber-500 flex items-center justify-center text-white shadow-md shadow-orange-500/30">
             <Flame className="w-4.5 h-4.5 fill-white text-white" />
           </div>
-          <h2 className="font-['Outfit'] font-black text-slate-900 text-xl sm:text-2xl tracking-tight leading-none">
-            Scratch &amp; Win
-          </h2>
+          <div>
+            <h2 className="font-['Outfit'] font-black text-slate-900 text-lg sm:text-xl tracking-tight leading-none">
+              Scratch &amp; Win
+            </h2>
+            <span className="text-[10px] font-black text-[#16a34a] tracking-tight block mt-0.5">
+              Win Up To ₹50 Cash
+            </span>
+          </div>
         </div>
 
         {/* Right Side: Dark Mode On/Off Toggle Switch */}
@@ -593,6 +606,15 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       {/* 3. CENTER STAGE: Big Prominent Scratch Card (Clean, No Clutter) */}
       {/* ------------------------------------------------------------- */}
       <div className="w-full relative flex flex-col items-center justify-center py-1 select-none">
+        {/* Win Up To ₹50 Glowing Pill Badge Above Card */}
+        <div className="relative z-20 mb-2 flex items-center justify-center">
+          <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white font-['Outfit'] font-black text-[11px] sm:text-xs px-4 py-1 rounded-full shadow-lg shadow-orange-500/25 border border-amber-200/60 flex items-center gap-1.5 tracking-tight animate-pulse">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>WIN UP TO ₹50 ON EVERY SCRATCH</span>
+            <Sparkles className="w-3.5 h-3.5" />
+          </div>
+        </div>
+
         {/* ----------------- THE BIG 3D GOLDEN SCRATCH CARD ----------------- */}
         <div className="relative z-10 w-full max-w-[420px]">
           {/* Glowing Golden Beveled Outer Frame with LED Bulbs */}
@@ -672,7 +694,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 {!isScratched && !isScratching && (
                   <div className="absolute bottom-3 inset-x-0 z-20 flex items-center justify-center pointer-events-none select-none">
                     <span className="text-[10px] font-extrabold text-white/95 bg-black/60 px-3 py-1 rounded-full backdrop-blur-xs shadow-md">
-                      👆 Rub finger here to scratch
+                      👆 Rub finger to scratch &bull; Win Up To ₹50
                     </span>
                   </div>
                 )}
@@ -840,7 +862,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             </h3>
 
             <p className="text-slate-600 text-xs font-semibold leading-relaxed mb-4 max-w-[250px]">
-              You don&apos;t have any scratches left. Invite friends to get 1 free scratch for every friend who joins!
+              You don&apos;t have any scratches left. Invite friends to get 1 free scratch card (Win up to ₹50) for every friend who joins!
             </p>
 
             <div className="w-full space-y-2.5">

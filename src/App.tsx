@@ -369,7 +369,7 @@ export default function App() {
               </div>
 
               <span className="text-[10px] font-black uppercase tracking-wider text-orange-600 bg-orange-50 px-3 py-1 rounded-full border border-orange-200 mb-2">
-                Scratch First To Unlock
+                Win Up To ₹50 Cash
               </span>
 
               <h3 className="font-['Outfit'] font-black text-xl text-slate-900 tracking-tight leading-tight mb-2">
@@ -377,7 +377,7 @@ export default function App() {
               </h3>
 
               <p className="text-slate-600 text-xs font-semibold leading-relaxed mb-5 max-w-[260px]">
-                Aapko mila hua 1 Free Scratch Card pehle scratch karein aur turant cash jeetein! Scratch karne ke baad 1 Refer = 1 Scratch unlock ho jayega!
+                Aapko mila hua 1 Free Scratch Card pehle scratch karein aur turant up to ₹50 tak cash jeetein! Scratch karne ke baad 1 Refer = 1 Scratch unlock ho jayega!
               </p>
 
               <button

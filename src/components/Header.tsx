@@ -134,7 +134,7 @@ export const Header: React.FC<HeaderProps> = ({
       {showNotificationToast && (
         <div className="fixed top-14 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-4 py-2.5 rounded-2xl shadow-2xl border border-slate-800 text-xs font-bold flex items-center gap-2 animate-slide-up">
           <span className="text-base">🔔</span>
-          <span>You have {user.spins} free scratches available! Scratch &amp; Win!</span>
+          <span>You have {user.spins} free scratches available! Scratch &amp; Win Up To ₹50!</span>
         </div>
       )}
     </>
